@@ -1,113 +1,167 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Volleyball Scoreboard</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Arial,sans-serif;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
 }
 
-body{
-    height:100vh;
-    overflow:hidden;
-    background:#111;
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #111;
 }
 
-.scoreboard{
-    display:flex;
-    width:100vw;
-    height:100vh;
-    position:relative;
+.scoreboard {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
 }
 
-.team{
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    color:white;
-    gap:30px;
+.team {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  color: white;
 }
 
-.team-blue{
-    background:#0057d9;
+.team-blue {
+  background: #0057d9;
 }
 
-.team-red{
-    background:#d90000;
+.team-red {
+  background: #d90000;
 }
 
-.team-name{
-    font-size:36px;
-    font-weight:bold;
+.score {
+  font-size: 190px;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 4px;
+  line-height: 1;
 }
 
-.score{
-    font-size:500px;
-    font-weight:bold;
-    color:white;
-    letter-spacing:5px;
-    line-height:1;
+.buttons {
+  display: flex;
+  gap: 18px;
 }
 
-.buttons{
-    display:flex;
-    gap:20px;
+button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  background: white;
+  color: #111;
 }
 
-button{
-    width:60px;
-    height:60px;
-    border-radius:50%;
-    border:none;
-    font-size:30px;
-    font-weight:bold;
-    cursor:pointer;
-    background:white;
-    color:#111;
+button:active {
+  transform: scale(0.95);
 }
 
-.reset-btn{
-    position:absolute;
-    top:25px;
-    left:50%;
-    transform:translateX(-50%);
-    width:140px;
-    height:60px;
-    border-radius:30px;
-    font-size:24px;
-    background:#fff;
-    color:#111;
-    z-index:10;
+.reset-btn {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130px;
+  height: 52px;
+  border-radius: 28px;
+  font-size: 22px;
+  background: white;
+  color: #111;
+  z-index: 10;
 }
 
-@media (max-width:700px){
-    .score{
-        font-size:1px;
-    }
+/* Mobile portrait */
+@media (max-width: 700px) and (orientation: portrait) {
+  .score {
+    font-size: 150px;
+  }
 
-    .team-name{
-        font-size:26px;
-    }
+  .team {
+    gap: 22px;
+  }
 
-    button{
-        width:50px;
-        height:50px;
-        font-size:24px;
-    }
+  button {
+    width: 52px;
+    height: 52px;
+    font-size: 26px;
+  }
 
-    .reset-btn{
-        width:120px;
-        height:50px;
-        font-size:20px;
-    }
+  .reset-btn {
+    width: 115px;
+    height: 46px;
+    font-size: 18px;
+    top: 14px;
+  }
+}
+
+/* Mobile landscape */
+@media (orientation: landscape) and (max-height: 500px) {
+  .score {
+    font-size: 95px;
+  }
+
+  .team {
+    gap: 10px;
+  }
+
+  button {
+    width: 42px;
+    height: 42px;
+    font-size: 22px;
+  }
+
+  .buttons {
+    gap: 12px;
+  }
+
+  .reset-btn {
+    top: 8px;
+    width: 95px;
+    height: 36px;
+    font-size: 15px;
+  }
+}
+
+/* Very small landscape phones */
+@media (orientation: landscape) and (max-height: 390px) {
+  .score {
+    font-size: 78px;
+  }
+
+  .team {
+    gap: 8px;
+  }
+
+  button {
+    width: 38px;
+    height: 38px;
+    font-size: 20px;
+  }
+
+  .reset-btn {
+    width: 88px;
+    height: 34px;
+    font-size: 14px;
+  }
 }
 </style>
 </head>
@@ -115,53 +169,56 @@ button{
 <body>
 
 <div class="scoreboard">
-<button class="reset-btn" onclick="resetScores()">Reset</button>
+  <button class="reset-btn" onclick="resetScores()">Reset</button>
 
-<div class="team team-blue">
-<div id="blueScore" class="score">00</div>
+  <div class="team team-blue">
+    <div id="blueScore" class="score">00</div>
 
-<div class="buttons">
-<button onclick="changeScore('blue',-1)">−</button>
-<button onclick="changeScore('blue',1)">+</button>
-</div>
-</div>
+    <div class="buttons">
+      <button onclick="changeScore('blue', -1)">−</button>
+      <button onclick="changeScore('blue', 1)">+</button>
+    </div>
+  </div>
 
-<div class="team team-red">
-<div id="redScore" class="score">00</div>
+  <div class="team team-red">
+    <div id="redScore" class="score">00</div>
 
-<div class="buttons">
-<button onclick="changeScore('red',-1)">−</button>
-<button onclick="changeScore('red',1)">+</button>
-</div>
-</div>
+    <div class="buttons">
+      <button onclick="changeScore('red', -1)">−</button>
+      <button onclick="changeScore('red', 1)">+</button>
+    </div>
+  </div>
 </div>
 
 <script>
 let blue = 0;
 let red = 0;
 
-function formatScore(score){
-    return score.toString().padStart(2,'0');
+function formatScore(score) {
+  return score.toString().padStart(2, "0");
 }
 
-function updateScores(){
-    document.getElementById("blueScore").textContent = formatScore(blue);
-    document.getElementById("redScore").textContent = formatScore(red);
+function updateScores() {
+  document.getElementById("blueScore").textContent = formatScore(blue);
+  document.getElementById("redScore").textContent = formatScore(red);
 }
 
-function changeScore(team, amount){
-    if(team === "blue"){
-        blue = Math.max(0, blue + amount);
-    }else{
-        red = Math.max(0, red + amount);
-    }
-    updateScores();
+function changeScore(team, amount) {
+  if (team === "blue") {
+    blue = Math.max(0, blue + amount);
+  }
+
+  if (team === "red") {
+    red = Math.max(0, red + amount);
+  }
+
+  updateScores();
 }
 
-function resetScores(){
-    blue = 0;
-    red = 0;
-    updateScores();
+function resetScores() {
+  blue = 0;
+  red = 0;
+  updateScores();
 }
 </script>
 
