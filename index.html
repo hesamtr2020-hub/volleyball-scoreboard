@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>Volleyball Scoreboard</title>
 
 <style>
@@ -11,6 +11,7 @@
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html,
@@ -19,6 +20,10 @@ body {
   height: 100%;
   overflow: hidden;
   background: #111;
+  touch-action: manipulation;
+  overscroll-behavior: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .scoreboard {
@@ -26,6 +31,7 @@ body {
   width: 100vw;
   height: 100vh;
   position: relative;
+  touch-action: manipulation;
 }
 
 .team {
@@ -36,15 +42,11 @@ body {
   justify-content: center;
   gap: 22px;
   color: white;
+  touch-action: manipulation;
 }
 
-.team-blue {
-  background: #0057d9;
-}
-
-.team-red {
-  background: #d90000;
-}
+.team-blue { background: #0057d9; }
+.team-red { background: #d90000; }
 
 .score {
   font-size: 190px;
@@ -69,6 +71,7 @@ button {
   cursor: pointer;
   background: white;
   color: #111;
+  touch-action: manipulation;
 }
 
 button:active {
@@ -89,22 +92,14 @@ button:active {
   z-index: 10;
 }
 
-/* Mobile portrait */
 @media (max-width: 700px) and (orientation: portrait) {
-  .score {
-    font-size: 150px;
-  }
-
-  .team {
-    gap: 22px;
-  }
-
+  .score { font-size: 150px; }
+  .team { gap: 22px; }
   button {
     width: 52px;
     height: 52px;
     font-size: 26px;
   }
-
   .reset-btn {
     width: 115px;
     height: 46px;
@@ -113,26 +108,15 @@ button:active {
   }
 }
 
-/* Mobile landscape */
 @media (orientation: landscape) and (max-height: 500px) {
-  .score {
-    font-size: 130px;
-  }
-
-  .team {
-    gap: 10px;
-  }
-
+  .score { font-size: 95px; }
+  .team { gap: 10px; }
   button {
     width: 42px;
     height: 42px;
     font-size: 22px;
   }
-
-  .buttons {
-    gap: 12px;
-  }
-
+  .buttons { gap: 12px; }
   .reset-btn {
     top: 8px;
     width: 95px;
@@ -141,22 +125,14 @@ button:active {
   }
 }
 
-/* Very small landscape phones */
 @media (orientation: landscape) and (max-height: 390px) {
-  .score {
-    font-size: 78px;
-  }
-
-  .team {
-    gap: 8px;
-  }
-
+  .score { font-size: 78px; }
+  .team { gap: 8px; }
   button {
     width: 38px;
     height: 38px;
     font-size: 20px;
   }
-
   .reset-btn {
     width: 88px;
     height: 34px;
@@ -173,7 +149,6 @@ button:active {
 
   <div class="team team-blue">
     <div id="blueScore" class="score">00</div>
-
     <div class="buttons">
       <button onclick="changeScore('blue', -1)">−</button>
       <button onclick="changeScore('blue', 1)">+</button>
@@ -182,7 +157,6 @@ button:active {
 
   <div class="team team-red">
     <div id="redScore" class="score">00</div>
-
     <div class="buttons">
       <button onclick="changeScore('red', -1)">−</button>
       <button onclick="changeScore('red', 1)">+</button>
@@ -204,14 +178,8 @@ function updateScores() {
 }
 
 function changeScore(team, amount) {
-  if (team === "blue") {
-    blue = Math.max(0, blue + amount);
-  }
-
-  if (team === "red") {
-    red = Math.max(0, red + amount);
-  }
-
+  if (team === "blue") blue = Math.max(0, blue + amount);
+  if (team === "red") red = Math.max(0, red + amount);
   updateScores();
 }
 
